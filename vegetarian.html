@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="card.css">
+</head>
+<body>
+    <ul class="topnav">
+        <li><a class="" href="index.html">Home</a></li>
+        
+        <li><a href="breakfast.html">Breakfast</a></li>
+        <li><a href="lunch.html">Lunch</a></li>
+        <li><a href="dinner.html">Dinner</a></li>
+        <li><a class="active" href="vegetarian.html">Vegetarian</a></li>
+        <li class="right"><a class="" href="login.html">Login</a></li>
+      </ul>
+
+        <h1 id="">Vegetarian</h1>
+        <div id="vegetarian">
+
+            <script>
+                 let host = "https://merger-latest-lewr.onrender.com";
+        let url = host + "/Menu/vegetarian";
+        async function getTheDinner(){
+            request = await fetch(url);
+            if(request.ok){
+                data = await request.json();
+               const noDupl = data.filter((v,i,a)=>a.findIndex(t=>(t.name === v.name))===i)
+            
+               console.log(noDupl);
+                console.log(data);
+                let breakfast = document.getElementById("vegetarian");
+                breakfast.innerHTML = "";
+                noDupl.forEach(element => {
+                    let div = document.createElement("div");
+                    div.className= "flip-card-inner"; 
+                    // div.innerHTML = element.name + " " + element.price;
+                    let div_prim = document.createElement("div");
+                    div_prim.className = "flip-card-front";
+                    div_prim.innerHTML = element.name + " " + element.price;
+                    let div_inner = document.createElement("div");
+                    div_inner.className = "flip-card-back";
+                    div_inner.innerHTML = element.description;
+                    div.appendChild(div_prim);
+                    div.appendChild(div_inner);
+                    breakfast.appendChild(div);
+                });
+
+            }
+
+        }
+
+        getTheDinner();
+            </script>
+</body>
+</html>
